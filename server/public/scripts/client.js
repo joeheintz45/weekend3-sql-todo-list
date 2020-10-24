@@ -4,6 +4,7 @@ function onReady() {
   console.log('Ready');
   $('.js-add-task').on('click', makeTask);
   $('.js-task-table').on('click', '.js-delete', deleteTask);
+  $('.js-task-table').on('click', '.js-complete', updateTask);
 
   getTask();
 }
@@ -30,12 +31,14 @@ function render(tasks) {
     $('.js-task-list').append(`
       <tr>
         <td>${task.new_task}</td>
-        <td>${task.completed}</td>
+        <td><button class="js-complete" data-status="${task.completed}" data-id="${task.id}">Complete</button></td>
         <td><button class="js-delete" data-id="${task.id}">Delete</button></td>
       </tr>
     `);
   }
 }
+
+function handleUpdate
 
 function getTask() {
   $.ajax({
@@ -71,6 +74,26 @@ function deleteTask() {
   $.ajax({
     type: 'DELETE',
     url: `/tasks/${taskId}`,
+  })
+    .then((response) => {
+      getTask();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function updateTask() {
+  const taskId = $(this).data('id');
+  const taskStatus = $(this).data('status');
+
+  if (taskStatus === true) {
+    $(this).text('Completed');
+  }
+
+  $.ajax({
+    type: 'PUT',
+    url: `/tasks/complete/${taskId}`,
   })
     .then((response) => {
       getTask();
