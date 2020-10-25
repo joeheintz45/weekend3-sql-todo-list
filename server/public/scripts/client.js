@@ -85,25 +85,24 @@ function postTask(newTask) {
 function deleteAlert() {
   swal({
     title: 'Are you sure?',
-    text: 'Once deleted, you will not be able to recover this imaginary file!',
+    text: 'Once deleted, you will not be able to recover this Task!',
     icon: 'warning',
     buttons: true,
     dangerMode: true,
   }).then((willDelete) => {
     if (willDelete) {
-      deleteTask();
-      swal('Poof! Your imaginary file has been deleted!', {
+      const taskId = $(this).data('id');
+      deleteTask(taskId);
+      swal('Poof! Your Task has been deleted!', {
         icon: 'success',
       });
     } else {
-      swal('Your imaginary file is safe!');
+      swal('Your Task is safe!');
     }
   });
 }
 
-function deleteTask() {
-  const taskId = $(this).data('id');
-
+function deleteTask(taskId) {
   $.ajax({
     type: 'DELETE',
     url: `/tasks/${taskId}`,
