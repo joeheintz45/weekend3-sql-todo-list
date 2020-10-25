@@ -29,10 +29,11 @@ function render(tasks) {
     const task = tasks[i];
 
     if (task.completed === true) {
+      $('.complete').addClass('complete');
       $('.js-task-list').append(`
-      <tr>
+      <tr class="complete">
         <td>${task.new_task}</td>
-        <td>Completed</td>
+        <td class="complete-cell">Completed</td>
         <td><button type="button" class="btn btn-danger js-delete" data-id="${task.id}">Delete</button></td>
       </tr>
     `);

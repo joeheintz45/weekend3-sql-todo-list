@@ -1,18 +1,37 @@
 header {
   margin-top: 10px;
-  border: solid 2px black;
-  border-radius: 20px;
+  padding-bottom: 10px;
+  border: solid 2px #5cb85c;
+  border-radius: 10px;
+}
+
+.complete {
+  background-color: #5cb85c;
+  color: white;
 }
 
 .js-add-task {
-  margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-.taskTable {
-  border-collapse: collapse;
+.js-delete {
+  float: right;
 }
 
-tr td {
-  /* border: solid 1px black; */
-  padding: 5px 25px;
+.js-complete {
+  float: right;
+}
+
+.complete-cell {
+  text-align: right;
+  font-weight: bold;
+}
+
+th {
+  font-size: 1.5em;
+}
+
+.table {
+  border: solid 2px #5cb85c;
 }
