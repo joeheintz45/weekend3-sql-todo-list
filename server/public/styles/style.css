@@ -1,8 +1,9 @@
 header {
   margin-top: 10px;
   padding-bottom: 10px;
-  border: solid 2px #5cb85c;
+  background-color: #5cb85c;
   border-radius: 10px;
+  color: white;
 }
 
 .complete {

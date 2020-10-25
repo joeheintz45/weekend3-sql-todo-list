@@ -3,7 +3,7 @@ $(document).ready(onReady);
 function onReady() {
   console.log('Ready');
   $('.js-add-task').on('click', makeTask);
-  $('.js-task-table').on('click', '.js-delete', deleteTask);
+  $('.js-task-table').on('click', '.js-delete', deleteAlert);
   $('.js-task-table').on('click', '.js-complete', updateTask);
 
   getTask();
@@ -34,10 +34,11 @@ function render(tasks) {
 
     if (task.completed === true) {
       $('.complete').addClass('complete');
+      $('.complete').removeClass('table-striped');
       $('.js-task-list').append(`
       <tr class="complete">
         <td>${task.new_task}</td>
-        <td class="complete-cell">Completed</td>
+        <td class="complete-cell">Good Job!</td>
         <td><button type="button" class="btn btn-danger js-delete" data-id="${task.id}">Delete</button></td>
       </tr>
     `);
@@ -52,8 +53,6 @@ function render(tasks) {
     }
   }
 }
-
-function handleUpdate() {}
 
 function getTask() {
   $.ajax({
@@ -81,6 +80,25 @@ function postTask(newTask) {
     .catch((err) => {
       console.log(err);
     });
+}
+
+function deleteAlert() {
+  swal({
+    title: 'Are you sure?',
+    text: 'Once deleted, you will not be able to recover this imaginary file!',
+    icon: 'warning',
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      deleteTask();
+      swal('Poof! Your imaginary file has been deleted!', {
+        icon: 'success',
+      });
+    } else {
+      swal('Your imaginary file is safe!');
+    }
+  });
 }
 
 function deleteTask() {
