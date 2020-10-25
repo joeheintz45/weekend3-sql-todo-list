@@ -28,17 +28,27 @@ function render(tasks) {
   for (let i = 0; i < tasks.length; i++) {
     const task = tasks[i];
 
-    $('.js-task-list').append(`
+    if (task.completed === true) {
+      $('.js-task-list').append(`
       <tr>
         <td>${task.new_task}</td>
-        <td><button class="js-complete" data-status="${task.completed}" data-id="${task.id}">Complete</button></td>
-        <td><button class="js-delete" data-id="${task.id}">Delete</button></td>
+        <td>Completed</td>
+        <td><button type="button" class="btn btn-danger js-delete" data-id="${task.id}">Delete</button></td>
       </tr>
     `);
+    } else {
+      $('.js-task-list').append(`
+      <tr>
+        <td>${task.new_task}</td>
+        <td><button type="button" class="btn btn-success js-complete" data-status="${task.completed}" data-id="${task.id}">Complete</button></td>
+        <td><button type="button" class="btn btn-danger js-delete" data-id="${task.id}">Delete</button></td>
+      </tr>
+    `);
+    }
   }
 }
 
-function handleUpdate
+function handleUpdate() {}
 
 function getTask() {
   $.ajax({
