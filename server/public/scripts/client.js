@@ -10,13 +10,17 @@ function onReady() {
 }
 
 function makeTask() {
-  newTask = {
-    new_task: $('.js-new-task').val(),
-    completed: false,
-  };
+  if ($('.js-new-task').val().length === 0) {
+    alert('Please Fill All Fields!');
+  } else {
+    newTask = {
+      new_task: $('.js-new-task').val(),
+      completed: false,
+    };
 
-  postTask(newTask);
-  clearInput();
+    postTask(newTask);
+    clearInput();
+  }
 }
 
 function clearInput() {
