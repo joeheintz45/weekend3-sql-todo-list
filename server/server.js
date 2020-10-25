@@ -7,6 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('server/public'));
 
+// route for the /tasks url
 let taskRouter = require('./routes/task.router');
 app.use('/tasks', taskRouter);
 

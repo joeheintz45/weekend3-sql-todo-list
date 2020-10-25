@@ -1,5 +1,6 @@
 $(document).ready(onReady);
 
+// page ready function
 function onReady() {
   console.log('Ready');
   $('.js-add-task').on('click', makeTask);
@@ -7,8 +8,9 @@ function onReady() {
   $('.js-task-table').on('click', '.js-complete', updateTask);
 
   getTask();
-}
+} // end onReady
 
+// checks if input is filled and stores task in object
 function makeTask() {
   if ($('.js-new-task').val().length === 0) {
     alert('Please Fill All Fields!');
@@ -21,17 +23,20 @@ function makeTask() {
     postTask(newTask);
     clearInput();
   }
-}
+} // end makeTask function
 
+// clears input field after submit
 function clearInput() {
   $('.js-new-task').val('');
-}
+} // end clearInput
 
+// renders the server data onto the page
 function render(tasks) {
   $('.js-task-list').empty();
   for (let i = 0; i < tasks.length; i++) {
     const task = tasks[i];
 
+    // checks if the task is completed and applies new color if true
     if (task.completed === true) {
       $('.complete').addClass('complete');
       $('.complete').removeClass('table-striped');
@@ -52,8 +57,9 @@ function render(tasks) {
     `);
     }
   }
-}
+} // end render function
 
+// gets the data from the server to be rendered on the page
 function getTask() {
   $.ajax({
     type: 'GET',
@@ -66,8 +72,9 @@ function getTask() {
     .catch((err) => {
       console.log(err);
     });
-}
+} // end getTask
 
+// posts data from the input to the server
 function postTask(newTask) {
   $.ajax({
     type: 'POST',
@@ -80,8 +87,9 @@ function postTask(newTask) {
     .catch((err) => {
       console.log(err);
     });
-}
+} // end postTask
 
+// alerts user if the are sure they want to delete task
 function deleteAlert() {
   swal({
     title: 'Are you sure?',
@@ -100,8 +108,9 @@ function deleteAlert() {
       swal('Your Task is safe!');
     }
   });
-}
+} // end deleteAlert
 
+// deletes data on the server if the user hits confirm
 function deleteTask(taskId) {
   $.ajax({
     type: 'DELETE',
@@ -113,8 +122,9 @@ function deleteTask(taskId) {
     .catch((err) => {
       console.log(err);
     });
-}
+} // end deleteTask
 
+// updates the tasks complete status if selected
 function updateTask() {
   const taskId = $(this).data('id');
   const taskStatus = $(this).data('status');
@@ -133,4 +143,4 @@ function updateTask() {
     .catch((err) => {
       console.log(err);
     });
-}
+} // end updateTask

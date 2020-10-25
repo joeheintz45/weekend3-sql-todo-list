@@ -3,6 +3,7 @@ const router = express.Router();
 
 const pool = require('../modules/pool');
 
+// GET route for client and database
 router.get('/', (req, res) => {
   console.log('successful get');
   const queryText = 'SELECT * FROM "tasks" ORDER BY "id";';
@@ -17,8 +18,9 @@ router.get('/', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-});
+}); // end GET route
 
+// POST route for client to server to database
 router.post('/', (req, res) => {
   console.log('successful post');
   const taskData = req.body;
@@ -36,8 +38,9 @@ router.post('/', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-});
+}); // end POST route
 
+// DELETE route for deleting data from database
 router.delete('/:id', (req, res) => {
   const taskId = req.params.id;
   const queryText = `DELETE FROM "tasks" WHERE "id"=$1;`;
@@ -52,8 +55,9 @@ router.delete('/:id', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-});
+}); // end DELETE route
 
+// PUT route for updating complete status of task
 router.put('/complete/:id', (req, res) => {
   const taskStatus = req.body;
   const queryText = `UPDATE "tasks" SET "completed"='true' WHERE "id"=$1;`;
@@ -68,6 +72,6 @@ router.put('/complete/:id', (req, res) => {
       console.log(err);
       res.sendStatus(500);
     });
-});
+}); // end PUT route
 
 module.exports = router;
